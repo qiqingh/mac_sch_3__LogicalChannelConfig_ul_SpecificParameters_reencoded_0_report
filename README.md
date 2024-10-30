@@ -24,7 +24,7 @@ An attacker could potentially exploit this vulnerability by crafting specific pa
 2. **Exception Handling**: Implement robust exception handling within `configure_current_BWP` to prevent abrupt termination when configuration data is incomplete or corrupted.
 
 **Malformed Packet Send From the Base Station**
-![Malformed Packet](https://github.com/qiqingh/OAI_Code_Analysis/blob/main/mac_sch_3__LogicalChannelConfig_ul_SpecificParameters_reencoded_0/3_0_pcap.png)
+![Malformed Packet](https://github.com/qiqingh/mac_sch_3__LogicalChannelConfig_ul_SpecificParameters_reencoded_0_report/blob/main/3_0_pcap.png)
 
 **PoC Code**
 The following PoC code generates a falsified packet sent from the Base Station (sender) to the User Equipment (receiver). Due to a vulnerability in the User Equipment, this packet causes the device to crash, resulting in a Denial of Service (DoS).
