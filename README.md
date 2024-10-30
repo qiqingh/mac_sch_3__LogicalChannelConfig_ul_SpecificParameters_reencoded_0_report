@@ -23,6 +23,25 @@ An attacker could potentially exploit this vulnerability by crafting specific pa
 1. **Enhanced Validation**: Strengthen validation and sanity checks for configuration structures, particularly for optional fields and external inputs, before processing.
 2. **Exception Handling**: Implement robust exception handling within `configure_current_BWP` to prevent abrupt termination when configuration data is incomplete or corrupted.
 
+**GDB Debug Information**
+```console
+Thread 15 "TASK_RRC_NRUE" received signal SIGABRT, Aborted.
+[Switching to Thread 0x761872c00700 (LWP 23669)]
+__GI_raise (sig=sig@entry=6) at ../sysdeps/unix/sysv/linux/raise.c:51
+51	../sysdeps/unix/sysv/linux/raise.c: No such file or directory.
+(gdb) bt
+#0  __GI_raise (sig=sig@entry=6) at ../sysdeps/unix/sysv/linux/raise.c:51
+#1  0x00007618893b97f1 in __GI_abort () at abort.c:79
+#2  0x000057fa8a71f56e in configure_current_BWP (mac=<optimized out>, scc=<optimized out>, cell_group_config=<optimized out>) at /home/user/wdissector/3rd-party/oai_5g_sa/openair2/LAYER2/NR_MAC_UE/config_ue.c:609
+#3  0x000057fa8a71fd19 in nr_rrc_mac_config_req_ue (module_id=<optimized out>, cc_idP=0, gNB_index=<optimized out>, mibP=<optimized out>, sccP=<optimized out>, cell_group_config=0x7618580046b0, scell_group_config=0x0) at /home/user/wdissector/3rd-party/oai_5g_sa/openair2/LAYER2/NR_MAC_UE/config_ue.c:712
+#4  0x000057fa8a6f543e in nr_rrc_ue_process_masterCellGroup (ctxt_pP=0x761872bff9a0, gNB_index=<optimized out>, masterCellGroup=<optimized out>) at /home/user/wdissector/3rd-party/oai_5g_sa/openair2/RRC/NR_UE/rrc_UE.c:1303
+#5  0x000057fa8a704cc6 in nr_rrc_ue_decode_ccch (ctxt_pP=0x761872bff9a0, Srb_info=<optimized out>, gNB_index=<optimized out>) at /home/user/wdissector/3rd-party/oai_5g_sa/openair2/RRC/NR_UE/rrc_UE.c:1418
+#6  0x000057fa8a708b6f in rrc_nrue_task (args_p=<optimized out>) at /home/user/wdissector/3rd-party/oai_5g_sa/openair2/RRC/NR_UE/rrc_UE.c:2364
+#7  0x000076188af446db in start_thread (arg=0x761872c00700) at pthread_create.c:463
+#8  0x000076188949a61f in clone () at ../sysdeps/unix/sysv/linux/x86_64/clone.S:95
+(gdb) 
+```
+
 **Malformed Packet Send From the Base Station**
 ![Malformed Packet](https://github.com/qiqingh/mac_sch_3__LogicalChannelConfig_ul_SpecificParameters_reencoded_0_report/blob/main/3_0_pcap.png)
 
